@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:xmvx/extension/vx_image_ext.dart';
 import 'package:xmvx/helper/vx_color.dart';
+import 'package:xmvx/pages/home/vx_module_style_detail_page.dart';
+import 'package:xmvx/pages/media/vx_media_home_page.dart';
 
 /// 首页主页面
 class XmvxHomePage extends StatefulWidget {
@@ -102,41 +104,46 @@ class _TopHeader extends StatelessWidget {
           Gap(24.w),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 32.w),
-            child: Card(
-              elevation: 4.w,
-              shadowColor: VxColor.c143C42.withValues(alpha: 0.4),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24.w)),
-              child: Container(
-                height: 240.w,
-                decoration: BoxDecoration(
-                  border: Border.all(color: VxColor.cWhite, width: 1.w),
-                  gradient: VxColor.cE8F5FF_cWhite,
-                  borderRadius: BorderRadius.circular(24.w),
-                ),
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      VxImageExt(assetPath: 'assets/play.png', width: 56.w, height: 56.w),
-                      Gap(12.w),
-                      Text(
-                        "智能成片",
-                        style: TextStyle(
-                          fontSize: 32.sp,
-                          color: VxColor.c1A1A1A,
-                          fontWeight: FontWeight.w500,
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => VXMediaHomePage()));
+              },
+              child: Card(
+                elevation: 4.w,
+                shadowColor: VxColor.c143C42.withValues(alpha: 0.4),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24.w)),
+                child: Container(
+                  height: 240.w,
+                  decoration: BoxDecoration(
+                    border: Border.all(color: VxColor.cWhite, width: 1.w),
+                    gradient: VxColor.cE8F5FF_cWhite,
+                    borderRadius: BorderRadius.circular(24.w),
+                  ),
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        VxImageExt(assetPath: 'assets/play.png', width: 56.w, height: 56.w),
+                        Gap(12.w),
+                        Text(
+                          "智能成片",
+                          style: TextStyle(
+                            fontSize: 32.sp,
+                            color: VxColor.c1A1A1A,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
-                      ),
-                      Gap(12.w),
-                      Text(
-                        "AI数字人快速生成视频",
-                        style: TextStyle(
-                          fontSize: 24.sp,
-                          color: VxColor.c969DA7,
-                          fontWeight: FontWeight.w400,
+                        Gap(12.w),
+                        Text(
+                          "AI数字人快速生成视频",
+                          style: TextStyle(
+                            fontSize: 24.sp,
+                            color: VxColor.c969DA7,
+                            fontWeight: FontWeight.w400,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -323,33 +330,41 @@ class _TemplateGrid extends StatelessWidget {
       ),
       itemBuilder: (context, idx) {
         final item = data[idx];
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            AspectRatio(
-              aspectRatio: 334.w / 460.w, // 图片宽高比，保证不会溢出
-              child: ClipRRect(
-                borderRadius: BorderRadius.all(Radius.circular(8.w)),
-                child: VxImageExt(
-                  assetPath: 'assets/${item['img']}',
-                  width: double.infinity,
-                  height: double.infinity,
-                  fit: BoxFit.cover,
+        return GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (contex) => VXModuleStyleDetailPage()),
+            );
+          },
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              AspectRatio(
+                aspectRatio: 334.w / 460.w, // 图片宽高比，保证不会溢出
+                child: ClipRRect(
+                  borderRadius: BorderRadius.all(Radius.circular(8.w)),
+                  child: VxImageExt(
+                    assetPath: 'assets/${item['img']}',
+                    width: double.infinity,
+                    height: double.infinity,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
-            ),
-            Gap(12.w),
-            Text(
-              item['title'] ?? '',
-              style: TextStyle(
-                fontSize: 28.sp,
-                color: VxColor.c1A1A1A,
-                fontWeight: FontWeight.w400,
+              Gap(12.w),
+              Text(
+                item['title'] ?? '',
+                style: TextStyle(
+                  fontSize: 28.sp,
+                  color: VxColor.c1A1A1A,
+                  fontWeight: FontWeight.w400,
+                ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
               ),
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-            ),
-          ],
+            ],
+          ),
         );
       },
     );
