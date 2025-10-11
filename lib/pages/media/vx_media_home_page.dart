@@ -5,7 +5,8 @@ import 'package:gap/gap.dart';
 import 'package:xmvx/extension/vx_bottom_sheet_widget.dart';
 import 'package:xmvx/extension/vx_image_ext.dart';
 import 'package:xmvx/helper/vx_color.dart';
-import 'package:xmvx/pages/media/vx_tabbar_widget.dart';
+import 'package:xmvx/pages/create/vx_create_copywriting_page.dart';
+import 'package:xmvx/pages/media/vx_template_gallery_widget.dart';
 
 class VXMediaHomePage extends StatefulWidget {
   const VXMediaHomePage({super.key});
@@ -108,7 +109,12 @@ class _MediaHomePageState extends State<VXMediaHomePage> {
                     child: Row(
                       children: [
                         GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => VxCreateCopywritingPage()),
+                            );
+                          },
                           child: _inputButtonIconWidget(164.w, 'assets/play.png', '生成文案'),
                         ),
                         Gap(16.w),
@@ -190,8 +196,93 @@ class _MediaHomePageState extends State<VXMediaHomePage> {
   }
 
   Widget _bottomWindowContent() {
-    return Container(
-      child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [Text("Tabbar")]),
+    // 导航标签数据
+    final List<String> categoriesList = [
+      "我的创建",
+      "精选模版",
+      "职场工作",
+      "养生中医",
+      "工厂车间",
+      "教育培训",
+      "餐饮美食",
+      "旅游出行",
+    ];
+    // 模板数据
+    final List<Map<String, String>> templatesList = [
+      {
+        "imageUrl":
+            "https://fastly.picsum.photos/id/65/400/500.jpg?hmac=je1YWkhEagBbwEf-xh6Szgw_Safog_buVKdOjw8sKtc",
+        "title": "办公场景 - 郑佳梦",
+      },
+      {
+        "imageUrl":
+            "https://fastly.picsum.photos/id/65/400/500.jpg?hmac=je1YWkhEagBbwEf-xh6Szgw_Safog_buVKdOjw8sKtc",
+        "title": "办公场景 - 郑佳梦",
+      },
+      {
+        "imageUrl":
+            "https://fastly.picsum.photos/id/65/400/500.jpg?hmac=je1YWkhEagBbwEf-xh6Szgw_Safog_buVKdOjw8sKtc",
+        "title": "办公场景 - 郑佳梦",
+      },
+      {
+        "imageUrl":
+            "https://fastly.picsum.photos/id/65/400/500.jpg?hmac=je1YWkhEagBbwEf-xh6Szgw_Safog_buVKdOjw8sKtc",
+        "title": "办公场景 - 郑佳梦",
+      },
+      {
+        "imageUrl":
+            "https://fastly.picsum.photos/id/65/400/500.jpg?hmac=je1YWkhEagBbwEf-xh6Szgw_Safog_buVKdOjw8sKtc",
+        "title": "办公场景 - 郑佳梦",
+      },
+      {
+        "imageUrl":
+            "https://fastly.picsum.photos/id/65/400/500.jpg?hmac=je1YWkhEagBbwEf-xh6Szgw_Safog_buVKdOjw8sKtc",
+        "title": "办公场景 - 郑佳梦",
+      },
+      {
+        "imageUrl":
+            "https://fastly.picsum.photos/id/65/400/500.jpg?hmac=je1YWkhEagBbwEf-xh6Szgw_Safog_buVKdOjw8sKtc",
+        "title": "办公场景 - 郑佳梦",
+      },
+      {
+        "imageUrl":
+            "https://fastly.picsum.photos/id/65/400/500.jpg?hmac=je1YWkhEagBbwEf-xh6Szgw_Safog_buVKdOjw8sKtc",
+        "title": "办公场景 - 郑佳梦",
+      },
+      {
+        "imageUrl":
+            "https://fastly.picsum.photos/id/65/400/500.jpg?hmac=je1YWkhEagBbwEf-xh6Szgw_Safog_buVKdOjw8sKtc",
+        "title": "办公场景 - 郑佳梦",
+      },
+      {
+        "imageUrl":
+            "https://fastly.picsum.photos/id/65/400/500.jpg?hmac=je1YWkhEagBbwEf-xh6Szgw_Safog_buVKdOjw8sKtc",
+        "title": "办公场景 - 郑佳梦",
+      },
+      {
+        "imageUrl":
+            "https://fastly.picsum.photos/id/65/400/500.jpg?hmac=je1YWkhEagBbwEf-xh6Szgw_Safog_buVKdOjw8sKtc",
+        "title": "办公场景 - 郑佳梦",
+      },
+      {
+        "imageUrl":
+            "https://fastly.picsum.photos/id/65/400/500.jpg?hmac=je1YWkhEagBbwEf-xh6Szgw_Safog_buVKdOjw8sKtc",
+        "title": "办公场景 - 郑佳梦",
+      },
+      {
+        "imageUrl":
+            "https://fastly.picsum.photos/id/65/400/500.jpg?hmac=je1YWkhEagBbwEf-xh6Szgw_Safog_buVKdOjw8sKtc",
+        "title": "办公场景 - 郑佳梦",
+      },
+      {
+        "imageUrl":
+            "https://fastly.picsum.photos/id/65/400/500.jpg?hmac=je1YWkhEagBbwEf-xh6Szgw_Safog_buVKdOjw8sKtc",
+        "title": "办公场景 - 郑佳梦",
+      },
+    ];
+    return SizedBox(
+      height: MediaQuery.of(context).size.height * 0.46,
+      child: VXTemplateGallery(categories: categoriesList, templates: templatesList),
     );
   }
 

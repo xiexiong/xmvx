@@ -18,6 +18,8 @@ dependencies:
   package_info_plus: 8.3.0
   flutter_bloc: 8.1.2
   flutter_screenutil: 5.9.3
+  cached_network_image: 3.3.1
+  connectivity_plus: 6.1.4
 
 dev_dependencies:
   flutter_test:
@@ -51,6 +53,8 @@ flutter:
   assets:
     - assets/play.png
     - assets/vx_back_icon.png
+    - assets/vx_select.png
+    - assets/vx_help.png
   #   - images/a_dot_ham.jpeg
   #
   # For details regarding assets in packages, see

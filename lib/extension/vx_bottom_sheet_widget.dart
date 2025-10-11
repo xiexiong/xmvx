@@ -46,12 +46,15 @@ class VxBottomSheetWidget {
                       children: [
                         Gap(16.w),
                         Center(
-                          child: Container(
-                            width: 64.w,
-                            height: 8.w,
-                            decoration: BoxDecoration(
-                              color: VxColor.c51565F,
-                              borderRadius: BorderRadius.circular(4.w),
+                          child: GestureDetector(
+                            onTap: () {},
+                            child: Container(
+                              width: 64.w,
+                              height: 8.w,
+                              decoration: BoxDecoration(
+                                color: VxColor.c51565F,
+                                borderRadius: BorderRadius.circular(4.w),
+                              ),
                             ),
                           ),
                         ),
