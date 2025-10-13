@@ -20,6 +20,8 @@ dependencies:
   flutter_screenutil: 5.9.3
   cached_network_image: 3.3.1
   connectivity_plus: 6.1.4
+  event_bus: 2.0.1
+  
 
 dev_dependencies:
   flutter_test:

@@ -44,7 +44,7 @@ class VxAppbarWidget extends StatelessWidget implements PreferredSizeWidget {
               : null,
       automaticallyImplyLeading: false,
       actions: actions,
-      backgroundColor: backgroundColor ?? Colors.transparent,
+      backgroundColor: backgroundColor ?? VxColor.cF4F5FA,
       iconTheme: iconTheme ?? Theme.of(context).iconTheme,
       elevation: elevation,
       centerTitle: true,

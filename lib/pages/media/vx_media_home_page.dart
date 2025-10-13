@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
-import 'package:xmvx/extension/vx_bottom_sheet_widget.dart';
+import 'package:xmvx/extension/vx_adaptive_bottom_sheet.dart';
 import 'package:xmvx/extension/vx_image_ext.dart';
 import 'package:xmvx/helper/vx_color.dart';
 import 'package:xmvx/pages/create/vx_create_copywriting_page.dart';
-import 'package:xmvx/pages/media/vx_template_gallery_widget.dart';
 
 class VXMediaHomePage extends StatefulWidget {
   const VXMediaHomePage({super.key});
@@ -119,7 +118,10 @@ class _MediaHomePageState extends State<VXMediaHomePage> {
                         ),
                         Gap(16.w),
                         GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            // _showWindow();
+                            _showAdaptiveBottomSheet(context, "", _recordingWidget());
+                          },
                           child: _inputButtonIconWidget(116.w, 'assets/play.png', '录音'),
                         ),
                         Gap(72.w),
@@ -142,24 +144,9 @@ class _MediaHomePageState extends State<VXMediaHomePage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      _isShowWindow = true;
-                    });
-                    _showBottomSheet(context, '选择数字人');
-                  },
-                  child: _buttonIconWidget('assets/play.png', "数字人"),
-                ),
+                GestureDetector(onTap: () {}, child: _buttonIconWidget('assets/play.png', "数字人")),
                 GestureDetector(onTap: () {}, child: _buttonIconWidget('assets/play.png', "配音")),
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      _isShowWindow = true;
-                    });
-                  },
-                  child: _buttonIconWidget('assets/play.png', "背景"),
-                ),
+                GestureDetector(onTap: () {}, child: _buttonIconWidget('assets/play.png', "背景")),
                 GestureDetector(
                   onTap: () {
                     setState(() {
@@ -176,115 +163,11 @@ class _MediaHomePageState extends State<VXMediaHomePage> {
     );
   }
 
-  void _showBottomSheet(BuildContext context, tTtitle) {
-    VxBottomSheetWidget.show(
-      context: context,
-      title: tTtitle,
-      height: 896.w,
-      content: _bottomWindowContent(),
-      onConfirm: () {
-        setState(() {
-          _isShowWindow = false;
-        });
-      },
-      onDismiss: () {
-        setState(() {
-          _isShowWindow = false;
-        });
-      },
-    );
-  }
-
-  Widget _bottomWindowContent() {
-    // 导航标签数据
-    final List<String> categoriesList = [
-      "我的创建",
-      "精选模版",
-      "职场工作",
-      "养生中医",
-      "工厂车间",
-      "教育培训",
-      "餐饮美食",
-      "旅游出行",
-    ];
-    // 模板数据
-    final List<Map<String, String>> templatesList = [
-      {
-        "imageUrl":
-            "https://fastly.picsum.photos/id/65/400/500.jpg?hmac=je1YWkhEagBbwEf-xh6Szgw_Safog_buVKdOjw8sKtc",
-        "title": "办公场景 - 郑佳梦",
-      },
-      {
-        "imageUrl":
-            "https://fastly.picsum.photos/id/65/400/500.jpg?hmac=je1YWkhEagBbwEf-xh6Szgw_Safog_buVKdOjw8sKtc",
-        "title": "办公场景 - 郑佳梦",
-      },
-      {
-        "imageUrl":
-            "https://fastly.picsum.photos/id/65/400/500.jpg?hmac=je1YWkhEagBbwEf-xh6Szgw_Safog_buVKdOjw8sKtc",
-        "title": "办公场景 - 郑佳梦",
-      },
-      {
-        "imageUrl":
-            "https://fastly.picsum.photos/id/65/400/500.jpg?hmac=je1YWkhEagBbwEf-xh6Szgw_Safog_buVKdOjw8sKtc",
-        "title": "办公场景 - 郑佳梦",
-      },
-      {
-        "imageUrl":
-            "https://fastly.picsum.photos/id/65/400/500.jpg?hmac=je1YWkhEagBbwEf-xh6Szgw_Safog_buVKdOjw8sKtc",
-        "title": "办公场景 - 郑佳梦",
-      },
-      {
-        "imageUrl":
-            "https://fastly.picsum.photos/id/65/400/500.jpg?hmac=je1YWkhEagBbwEf-xh6Szgw_Safog_buVKdOjw8sKtc",
-        "title": "办公场景 - 郑佳梦",
-      },
-      {
-        "imageUrl":
-            "https://fastly.picsum.photos/id/65/400/500.jpg?hmac=je1YWkhEagBbwEf-xh6Szgw_Safog_buVKdOjw8sKtc",
-        "title": "办公场景 - 郑佳梦",
-      },
-      {
-        "imageUrl":
-            "https://fastly.picsum.photos/id/65/400/500.jpg?hmac=je1YWkhEagBbwEf-xh6Szgw_Safog_buVKdOjw8sKtc",
-        "title": "办公场景 - 郑佳梦",
-      },
-      {
-        "imageUrl":
-            "https://fastly.picsum.photos/id/65/400/500.jpg?hmac=je1YWkhEagBbwEf-xh6Szgw_Safog_buVKdOjw8sKtc",
-        "title": "办公场景 - 郑佳梦",
-      },
-      {
-        "imageUrl":
-            "https://fastly.picsum.photos/id/65/400/500.jpg?hmac=je1YWkhEagBbwEf-xh6Szgw_Safog_buVKdOjw8sKtc",
-        "title": "办公场景 - 郑佳梦",
-      },
-      {
-        "imageUrl":
-            "https://fastly.picsum.photos/id/65/400/500.jpg?hmac=je1YWkhEagBbwEf-xh6Szgw_Safog_buVKdOjw8sKtc",
-        "title": "办公场景 - 郑佳梦",
-      },
-      {
-        "imageUrl":
-            "https://fastly.picsum.photos/id/65/400/500.jpg?hmac=je1YWkhEagBbwEf-xh6Szgw_Safog_buVKdOjw8sKtc",
-        "title": "办公场景 - 郑佳梦",
-      },
-      {
-        "imageUrl":
-            "https://fastly.picsum.photos/id/65/400/500.jpg?hmac=je1YWkhEagBbwEf-xh6Szgw_Safog_buVKdOjw8sKtc",
-        "title": "办公场景 - 郑佳梦",
-      },
-      {
-        "imageUrl":
-            "https://fastly.picsum.photos/id/65/400/500.jpg?hmac=je1YWkhEagBbwEf-xh6Szgw_Safog_buVKdOjw8sKtc",
-        "title": "办公场景 - 郑佳梦",
-      },
-    ];
-    return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.46,
-      child: VXTemplateGallery(categories: categoriesList, templates: templatesList),
-    );
-  }
+  // void _showWindow(bool show) {
+  //   setState(() {
+  //     _isShowWindow = show;
+  //   });
+  // }
 
   Widget _buttonIconWidget(iImg, iTxt) {
     return SizedBox(
@@ -431,5 +314,62 @@ class _MediaHomePageState extends State<VXMediaHomePage> {
         ],
       ),
     );
+  }
+
+  void _showAdaptiveBottomSheet(BuildContext context, String txt, Widget contentBody) {
+    VXAdaptiveBottomSheet.show(
+      context: context,
+      showDragHandle: true,
+      backgroundColor: VxColor.c232323,
+      barrierColor: Colors.transparent,
+      isShowButtom: false,
+      left: _showLeftWidget(),
+      center: _showContentWidget(txt),
+      right: GestureDetector(onTap: () {}, child: _showRightWidget()),
+      child: contentBody,
+      maxHeight: 706.w,
+      onClose: () {},
+    );
+  }
+
+  Widget _showContentWidget(String txt) {
+    return Text(
+      txt,
+      maxLines: 1,
+      overflow: TextOverflow.ellipsis,
+      style: TextStyle(color: VxColor.c1A1A1A, fontSize: 32.sp, fontWeight: FontWeight.bold),
+    );
+  }
+
+  Widget _showLeftWidget() {
+    return Container(
+      alignment: Alignment.centerLeft,
+      child: IconButton(
+        icon: Icon(Icons.close, weight: 48.w, color: VxColor.cWhite),
+        onPressed: () => Navigator.pop(context),
+      ),
+    );
+  }
+
+  Widget _showRightWidget() {
+    return Container(
+      width: 120.w,
+      height: 64.w,
+      margin: EdgeInsets.only(right: 32.w),
+      decoration: BoxDecoration(
+        color: VxColor.cWhite.withValues(alpha: 0.08),
+        borderRadius: BorderRadius.circular(8.w),
+      ),
+      child: Center(
+        child: Text(
+          "转文字",
+          style: TextStyle(color: VxColor.c969DA7, fontSize: 32.sp, fontWeight: FontWeight.w400),
+        ),
+      ),
+    );
+  }
+
+  Widget _recordingWidget() {
+    return Container(width: ScreenUtil().screenWidth, height: 586.w);
   }
 }

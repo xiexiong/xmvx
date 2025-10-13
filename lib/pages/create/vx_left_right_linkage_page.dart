@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:xmvx/helper/vx_color.dart';
+import 'package:xmvx/helper/vx_global.dart';
+import 'package:xmvx/utils/vx_event_bus.dart';
 
 class VXLeftRightLinkageWidget extends StatefulWidget {
-  const VXLeftRightLinkageWidget({super.key});
+  final String? title;
+  const VXLeftRightLinkageWidget({super.key, this.title});
 
   @override
   // ignore: library_private_types_in_public_api
@@ -30,18 +33,18 @@ class _VXLeftRightLinkageWidgetState extends State<VXLeftRightLinkageWidget> {
   // 右侧内容数据 - 模拟不同分类对应的产品
   final Map<String, List<Map<String, String>>> _contentData = {
     "御坊堂": [
-      {"name": "海狗丸", "image": "assets/products/haigouwan.png"},
-      {"name": "御坊堂肽参牡蛎饮御坊堂肽参牡蛎饮", "image": "assets/products/taicanshengmuli.png"},
+      {"name": "海狗丸", "image": "assets/play.png"},
+      {"name": "御坊堂肽参牡蛎饮御坊堂肽参牡蛎饮御坊堂肽参牡蛎饮御坊堂肽参牡蛎饮", "image": "assets/play.png"},
     ],
     "东方素养": [
-      {"name": "一参元气饮", "image": "assets/products/yuanshenqi.png"},
+      {"name": "一参元气饮", "image": "assets/play.png"},
     ],
     "生命健": [
-      {"name": "八珍萃妍饮", "image": "assets/products/bazhen.png"},
-      {"name": "双萃酵素饮", "image": "assets/products/shuangcui.png"},
+      {"name": "八珍萃妍饮", "image": "assets/play.png"},
+      {"name": "双萃酵素饮", "image": "assets/play.png"},
     ],
     "泽谷": [
-      {"name": "肉苁蓉淫羊藿山茱萸", "image": "assets/products/roucongrong.png"},
+      {"name": "肉苁蓉淫羊藿山茱萸", "image": "assets/play.png"},
     ],
     "露嘉堡": [],
     "帝凡": [],
@@ -49,15 +52,22 @@ class _VXLeftRightLinkageWidgetState extends State<VXLeftRightLinkageWidget> {
     "思莉姿": [],
     "泽颜": [],
     "美塑臻": [
-      {"name": "海狗丸胶囊", "image": "assets/products/haigouwanjiaonang.png"},
+      {"name": "海狗丸胶囊", "image": "assets/play.png"},
     ],
     "氧悦": [
-      {"name": "角鲨烯", "image": "assets/products/jiaoshaxi.png"},
+      {"name": "角鲨烯", "image": "assets/play.png"},
     ],
   };
 
   // 当前选中的导航项索引
   int _selectedIndex = 0;
+  String _selectedProduct = "";
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedProduct = widget.title ?? "";
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -135,42 +145,55 @@ class _VXLeftRightLinkageWidgetState extends State<VXLeftRightLinkageWidget> {
 
   // 构建产品项
   Widget _buildProductItem(Map<String, String> product) {
-    return Container(
-      height: 112.w,
-      margin: EdgeInsets.only(bottom: 16.w, right: 30.w, left: 24.w),
-      decoration: BoxDecoration(color: VxColor.cF4F5FA, borderRadius: BorderRadius.circular(16.w)),
-      child: Row(
-        children: [
-          // 产品图片
-          Container(
-            width: 112.w,
-            height: 112.w,
-            decoration: BoxDecoration(
-              color: Colors.grey[200],
-              borderRadius: BorderRadius.circular(4),
-              image:
-                  product["image"] != null
-                      ? DecorationImage(image: AssetImage(product["image"]!), fit: BoxFit.cover)
+    return GestureDetector(
+      onTap: () {
+        if (_selectedProduct == product["name"]) {
+          VXGlobal.eventBus.fire(ProductNameEvent(""));
+          _selectedProduct = "";
+        } else {
+          VXGlobal.eventBus.fire(ProductNameEvent(product["name"] ?? "未知名产品"));
+        }
+      },
+      child: Container(
+        height: 112.w,
+        margin: EdgeInsets.only(bottom: 16.w, right: 30.w, left: 24.w),
+        decoration: BoxDecoration(
+          color: VxColor.cF4F5FA,
+          borderRadius: BorderRadius.circular(16.w),
+        ),
+        child: Row(
+          children: [
+            // 产品图片
+            Container(
+              width: 112.w,
+              height: 112.w,
+              decoration: BoxDecoration(
+                color: Colors.grey[200],
+                borderRadius: BorderRadius.circular(4),
+                image:
+                    product["image"] != null
+                        ? DecorationImage(image: AssetImage(product["image"]!), fit: BoxFit.cover)
+                        : null,
+              ),
+              child:
+                  product["image"] == null
+                      ? Icon(Icons.image_not_supported, color: Colors.grey)
                       : null,
             ),
-            child:
-                product["image"] == null
-                    ? Icon(Icons.image_not_supported, color: Colors.grey)
-                    : null,
-          ),
 
-          Gap(24.w),
+            Gap(24.w),
 
-          // 产品名称
-          Expanded(
-            child: Text(
-              product["name"] ?? "未知产品",
-              style: TextStyle(fontSize: 28.sp, color: VxColor.c1A1A1A),
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
+            // 产品名称
+            Expanded(
+              child: Text(
+                product["name"] ?? "未知产品",
+                style: TextStyle(fontSize: 28.sp, color: VxColor.c1A1A1A),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -7,6 +7,7 @@
  * 功能描述:  
  */
 
+import 'package:event_bus/event_bus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -28,6 +29,9 @@ class VXGlobal {
     // 数据库连接
     // _db = await DataBaseManager.openDataBase();
   }
+
+  /// 全局事件总线
+  static final EventBus eventBus = EventBus();
 
   /// 获取 SharedPreferences 实例
   static SharedPreferences get prefs {
