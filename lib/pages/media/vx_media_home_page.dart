@@ -6,6 +6,8 @@ import 'package:xmvx/extension/vx_adaptive_bottom_sheet.dart';
 import 'package:xmvx/extension/vx_image_ext.dart';
 import 'package:xmvx/helper/vx_color.dart';
 import 'package:xmvx/pages/create/vx_create_copywriting_page.dart';
+import 'package:xmvx/pages/media/vx_tabbar_gridview_page.dart';
+import 'package:xmvx/pages/media/vx_tabbar_listview_page.dart';
 
 class VXMediaHomePage extends StatefulWidget {
   const VXMediaHomePage({super.key});
@@ -120,7 +122,7 @@ class _MediaHomePageState extends State<VXMediaHomePage> {
                         GestureDetector(
                           onTap: () {
                             // _showWindow();
-                            _showAdaptiveBottomSheet(context, "", _recordingWidget());
+                            _showAdaptiveBottomSheet(context, true, "", _recordingWidget());
                           },
                           child: _inputButtonIconWidget(116.w, 'assets/play.png', '录音'),
                         ),
@@ -144,14 +146,27 @@ class _MediaHomePageState extends State<VXMediaHomePage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                GestureDetector(onTap: () {}, child: _buttonIconWidget('assets/play.png', "数字人")),
-                GestureDetector(onTap: () {}, child: _buttonIconWidget('assets/play.png', "配音")),
-                GestureDetector(onTap: () {}, child: _buttonIconWidget('assets/play.png', "背景")),
                 GestureDetector(
                   onTap: () {
-                    setState(() {
-                      _isShowWindow = false;
-                    });
+                    _showAdaptiveBottomSheet(context, false, "选择数字人", _TabGridViewWidget(true));
+                  },
+                  child: _buttonIconWidget('assets/play.png', "数字人"),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    _showAdaptiveBottomSheet(context, false, "配音", _TabListViewWidget(false));
+                  },
+                  child: _buttonIconWidget('assets/play.png', "配音"),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    _showAdaptiveBottomSheet(context, false, "背景", _TabGridViewWidget(false));
+                  },
+                  child: _buttonIconWidget('assets/play.png', "背景"),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    _showAdaptiveBottomSheet(context, false, "音乐", _TabListViewWidget(true));
                   },
                   child: _buttonIconWidget('assets/play.png', "音乐"),
                 ),
@@ -163,11 +178,11 @@ class _MediaHomePageState extends State<VXMediaHomePage> {
     );
   }
 
-  // void _showWindow(bool show) {
-  //   setState(() {
-  //     _isShowWindow = show;
-  //   });
-  // }
+  void _showWindow(bool show) {
+    setState(() {
+      _isShowWindow = show;
+    });
+  }
 
   Widget _buttonIconWidget(iImg, iTxt) {
     return SizedBox(
@@ -316,19 +331,34 @@ class _MediaHomePageState extends State<VXMediaHomePage> {
     );
   }
 
-  void _showAdaptiveBottomSheet(BuildContext context, String txt, Widget contentBody) {
+  void _showAdaptiveBottomSheet(
+    BuildContext context,
+    bool isNoeTitle,
+    String txt,
+    Widget contentBody,
+  ) {
     VXAdaptiveBottomSheet.show(
       context: context,
       showDragHandle: true,
       backgroundColor: VxColor.c232323,
       barrierColor: Colors.transparent,
       isShowButtom: false,
-      left: _showLeftWidget(),
+      left: isNoeTitle ? _showLeftWidget() : Text(""),
       center: _showContentWidget(txt),
-      right: GestureDetector(onTap: () {}, child: _showRightWidget()),
+      right:
+          isNoeTitle
+              ? GestureDetector(onTap: () {}, child: _showRightWidget())
+              : IconButton(
+                icon: Icon(Icons.done_rounded, weight: 48.w, color: VxColor.cWhite),
+                onPressed: () => Navigator.pop(context),
+              ),
       child: contentBody,
-      maxHeight: 706.w,
-      onClose: () {},
+      maxHeight: isNoeTitle ? 706.w : 896.w,
+      onClose: () {
+        if (!isNoeTitle) {
+          _showWindow(false);
+        }
+      },
     );
   }
 
@@ -337,7 +367,7 @@ class _MediaHomePageState extends State<VXMediaHomePage> {
       txt,
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
-      style: TextStyle(color: VxColor.c1A1A1A, fontSize: 32.sp, fontWeight: FontWeight.bold),
+      style: TextStyle(color: VxColor.cWhite, fontSize: 32.sp, fontWeight: FontWeight.bold),
     );
   }
 
@@ -370,6 +400,26 @@ class _MediaHomePageState extends State<VXMediaHomePage> {
   }
 
   Widget _recordingWidget() {
-    return Container(width: ScreenUtil().screenWidth, height: 586.w);
+    return SizedBox(width: ScreenUtil().screenWidth, height: 586.w);
+  }
+
+  // ignore: non_constant_identifier_names
+  Widget _TabGridViewWidget(bool isShowTitle) {
+    _showWindow(true);
+    return SizedBox(
+      width: ScreenUtil().screenWidth,
+      height: 776.w,
+      child: VXTabBarGridViewPage(isShowTitle: isShowTitle),
+    );
+  }
+
+  // ignore: non_constant_identifier_names
+  Widget _TabListViewWidget(bool isShowTitle) {
+    _showWindow(true);
+    return SizedBox(
+      width: ScreenUtil().screenWidth,
+      height: 776.w,
+      child: VXTabBarListViewPage(isShowMusic: isShowTitle),
+    );
   }
 }
