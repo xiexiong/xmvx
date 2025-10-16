@@ -6,6 +6,7 @@ import 'package:xmvx/extension/vx_adaptive_bottom_sheet.dart';
 import 'package:xmvx/extension/vx_image_ext.dart';
 import 'package:xmvx/helper/vx_color.dart';
 import 'package:xmvx/pages/create/vx_create_copywriting_page.dart';
+import 'package:xmvx/pages/media/vx_recorder_widget.dart';
 import 'package:xmvx/pages/media/vx_tabbar_gridview_page.dart';
 import 'package:xmvx/pages/media/vx_tabbar_listview_page.dart';
 
@@ -400,7 +401,7 @@ class _MediaHomePageState extends State<VXMediaHomePage> {
   }
 
   Widget _recordingWidget() {
-    return SizedBox(width: ScreenUtil().screenWidth, height: 586.w);
+    return SizedBox(width: ScreenUtil().screenWidth, height: 586.w, child: VxAudioRecorderWidget());
   }
 
   // ignore: non_constant_identifier_names

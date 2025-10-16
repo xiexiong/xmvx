@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:xmvx/extension/vx_image_ext.dart';
 import 'package:xmvx/helper/vx_color.dart';
+import 'package:xmvx/pages/home/vx_custom_digital_human_page.dart';
 import 'package:xmvx/pages/home/vx_module_style_detail_page.dart';
 import 'package:xmvx/pages/media/vx_media_home_page.dart';
 
@@ -156,7 +157,15 @@ class _TopHeader extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                _MenuIcon(title: "定制数字人", img: "play"),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => VXCustomDigitalHumanPage()),
+                    );
+                  },
+                  child: _MenuIcon(title: "定制数字人", img: "play"),
+                ),
                 _MenuIcon(title: "克隆音色", img: "play"),
                 _MenuIcon(title: "AI文案创作", img: "play"),
                 _MenuIcon(title: "我的创作", img: "play"),

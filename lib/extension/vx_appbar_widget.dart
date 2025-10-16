@@ -11,6 +11,7 @@ class VxAppbarWidget extends StatelessWidget implements PreferredSizeWidget {
   final Color? backgroundColor;
   final IconThemeData? iconTheme;
   final double elevation;
+  final BoxDecoration? boxDecoration;
 
   // ignore: use_super_parameters
   const VxAppbarWidget({
@@ -21,6 +22,7 @@ class VxAppbarWidget extends StatelessWidget implements PreferredSizeWidget {
     this.backgroundColor,
     this.iconTheme,
     this.elevation = 0,
+    this.boxDecoration,
   }) : super(key: key);
 
   @override
@@ -49,6 +51,7 @@ class VxAppbarWidget extends StatelessWidget implements PreferredSizeWidget {
       elevation: elevation,
       centerTitle: true,
       systemOverlayStyle: SystemUiOverlayStyle.dark,
+      flexibleSpace: Container(decoration: boxDecoration),
     );
   }
 

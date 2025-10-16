@@ -16,6 +16,7 @@ class VxColor {
   static const Color c232323 = Color(0xFF232323);
   static const Color c323232 = Color(0xFF323232);
   static const Color c143C42 = Color(0xFF143C42);
+  static const Color cE3F0FD = Color(0xFFE3F0FD);
 
   // ignore: constant_identifier_names
   static const LinearGradient cD8EDFF_cF4F5FA = LinearGradient(
@@ -26,6 +27,20 @@ class VxColor {
   // ignore: constant_identifier_names
   static const LinearGradient cE8F5FF_cWhite = LinearGradient(
     colors: [cE8F5FF, cWhite],
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+  );
+
+  // ignore: constant_identifier_names
+  static const LinearGradient cE8F5FF_cE3F0FD = LinearGradient(
+    colors: [cE8F5FF, cE3F0FD],
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+  );
+
+  // ignore: constant_identifier_names
+  static const LinearGradient cE3F0FD_cF4F5FA = LinearGradient(
+    colors: [cE3F0FD, cF4F5FA],
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
   );
