@@ -17,6 +17,7 @@ class VxColor {
   static const Color c323232 = Color(0xFF323232);
   static const Color c143C42 = Color(0xFF143C42);
   static const Color cE3F0FD = Color(0xFFE3F0FD);
+  static const Color c000000 = Color(0xFF000000);
 
   // ignore: constant_identifier_names
   static const LinearGradient cD8EDFF_cF4F5FA = LinearGradient(

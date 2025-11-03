@@ -22,6 +22,8 @@ dependencies:
   event_bus: 2.0.1
   path_provider: 2.1.5
   permission_handler: 12.0.1
+  flutter_sound: 9.28.0
+  audio_session: 0.2.2
   
 
 dev_dependencies:
@@ -58,6 +60,12 @@ flutter:
     - assets/vx_back_icon.png
     - assets/vx_select.png
     - assets/vx_help.png
+    - assets/detele.png
+    - assets/edit.png
+    - assets/menu.png
+    - assets/playicon.png
+    - assets/playing.png
+    - assets/upload.png
   #   - images/a_dot_ham.jpeg
   #
   # For details regarding assets in packages, see
