@@ -59,7 +59,7 @@ class VxSoundRecorderUtil {
       _isOpened = true;
       return true;
     } catch (e) {
-      print('初始化录音器失败: $e');
+      debugPrint('初始化录音器失败: $e');
       _isOpened = false;
       return false;
     } finally {
@@ -102,7 +102,7 @@ class VxSoundRecorderUtil {
       _isRecording = true;
       return true;
     } catch (e) {
-      print('开始录音失败: $e');
+      debugPrint('开始录音失败: $e');
       _isRecording = false;
       return false;
     }
@@ -121,7 +121,7 @@ class VxSoundRecorderUtil {
         return _filePath;
       }
     } catch (e) {
-      print('停止录音失败: $e');
+      debugPrint('停止录音失败: $e');
     }
     return null;
   }
@@ -147,7 +147,7 @@ class VxSoundRecorderUtil {
         _filePath = null;
       }
     } catch (e) {
-      print('取消录音失败: $e');
+      debugPrint('取消录音失败: $e');
     }
   }
 
@@ -162,7 +162,7 @@ class VxSoundRecorderUtil {
       }
       await _recordingController.close();
     } catch (e) {
-      print('释放录音器资源失败: $e');
+      debugPrint('释放录音器资源失败: $e');
     }
   }
 

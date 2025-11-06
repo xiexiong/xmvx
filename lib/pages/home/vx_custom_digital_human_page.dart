@@ -5,6 +5,7 @@ import 'package:xmvx/extension/vx_adaptive_bottom_sheet.dart';
 import 'package:xmvx/extension/vx_appbar_widget.dart';
 import 'package:xmvx/extension/vx_image_ext.dart';
 import 'package:xmvx/helper/vx_color.dart';
+import 'package:xmvx/pages/media/vx_video_recorder_page.dart';
 
 class VXCustomDigitalHumanPage extends StatefulWidget {
   const VXCustomDigitalHumanPage({super.key});
@@ -106,7 +107,12 @@ class _VXCustomDigitalHumanPageState extends State<VXCustomDigitalHumanPage> {
     return Container(
       height: 96.w,
       decoration: BoxDecoration(color: VxColor.c4F7EFF, borderRadius: BorderRadius.circular(24.w)),
-      child: Center(child: _textView("开始制作", VxColor.cWhite, 32.sp, FontWeight.bold)),
+      child: GestureDetector(
+        onTap: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => VxVideoRecorderPage()));
+        },
+        child: Center(child: _textView("开始制作", VxColor.cWhite, 32.sp, FontWeight.bold)),
+      ),
     );
   }
 

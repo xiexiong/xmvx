@@ -3,10 +3,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:xmvx/extension/vx_image_ext.dart';
 import 'package:xmvx/helper/vx_color.dart';
+import 'package:xmvx/pages/create/vx_create_copywriting_page.dart';
 import 'package:xmvx/pages/home/vx_custom_digital_human_page.dart';
 import 'package:xmvx/pages/home/vx_module_style_detail_page.dart';
 import 'package:xmvx/pages/media/vx_media_home_page.dart';
-import 'package:xmvx/pages/timbre/widget/vx_record_screen_state.dart';
+import 'package:xmvx/pages/my/vx_my_creation_page.dart';
+import 'package:xmvx/pages/timbre/vx_timbre_list_page.dart';
 
 /// 首页主页面
 class XmvxHomePage extends StatefulWidget {
@@ -30,6 +32,17 @@ class _XmvxHomePageState extends State<XmvxHomePage> with TickerProviderStateMix
       builder: (context, child) {
         return Scaffold(
           backgroundColor: VxColor.cF4F5FA,
+          appBar: AppBar(
+            title: Text(
+              "AI数字人",
+              style: TextStyle(
+                color: VxColor.c1A1A1A,
+                fontSize: 36.sp,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            flexibleSpace: Container(decoration: BoxDecoration(gradient: VxColor.cE8F5FF_cE3F0FD)),
+          ),
           body: SafeArea(
             child: CustomScrollView(
               slivers: [
@@ -86,24 +99,11 @@ class _TopHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: ScreenUtil().screenWidth,
-      decoration: BoxDecoration(gradient: VxColor.cD8EDFF_cF4F5FA),
+      decoration: BoxDecoration(gradient: VxColor.cE3F0FD_cF4F5FA),
       padding: EdgeInsets.only(bottom: 24.w),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Gap(40.w),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 32.w),
-            child: Text(
-              "AI数字人",
-              style: TextStyle(
-                color: VxColor.c1A1A1A,
-                fontSize: 36.sp,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ),
-          Gap(24.w),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 32.w),
             child: GestureDetector(
@@ -167,13 +167,29 @@ class _TopHeader extends StatelessWidget {
                   },
                   child: _MenuIcon(title: "定制数字人", img: "play"),
                 ),
-                GestureDetector(onTap: () {}, child: _MenuIcon(title: "克隆音色", img: "play")),
-                GestureDetector(onTap: () {}, child: _MenuIcon(title: "AI文案创作", img: "play")),
                 GestureDetector(
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => VxRecordScreenState()),
+                      MaterialPageRoute(builder: (context) => VxTimbreListPage()),
+                    );
+                  },
+                  child: _MenuIcon(title: "克隆音色", img: "play"),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => VxCreateCopywritingPage()),
+                    );
+                  },
+                  child: _MenuIcon(title: "AI文案创作", img: "play"),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => VxMyCreationPage()),
                     );
                   },
                   child: _MenuIcon(title: "我的创作", img: "play"),

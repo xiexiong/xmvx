@@ -5,6 +5,7 @@ import 'package:xmvx/extension/vx_adaptive_bottom_sheet.dart';
 import 'package:xmvx/extension/vx_appbar_widget.dart';
 import 'package:xmvx/extension/vx_image_ext.dart';
 import 'package:xmvx/helper/vx_color.dart';
+import 'package:xmvx/pages/timbre/widget/vx_record_screen_state.dart';
 
 class VxTimbreListPage extends StatefulWidget {
   const VxTimbreListPage({super.key});
@@ -273,7 +274,20 @@ class _VxTimbreListPageState extends State<VxTimbreListPage> {
               ],
             ),
           ),
-          Positioned(bottom: 16.w, left: 32.w, right: 32.w, child: Text("data")),
+          Positioned(
+            bottom: 16.w,
+            left: 32.w,
+            right: 32.w,
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => VxRecordScreenState()),
+                );
+              },
+              child: Text("data"),
+            ),
+          ),
         ],
       ),
     );
