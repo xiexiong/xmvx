@@ -57,7 +57,7 @@ class _XmvxHomePageState extends State<XmvxHomePage> with TickerProviderStateMix
                       style: TextStyle(
                         color: VxColor.c1A1A1A,
                         fontSize: 32.sp,
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
@@ -132,7 +132,7 @@ class _TopHeader extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 32.sp,
                             color: VxColor.c1A1A1A,
-                            fontWeight: FontWeight.w500,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                         Gap(12.w),

@@ -112,13 +112,13 @@ class _HomePageState extends State<HomePage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           TextButton(
-            child: const Text('进入聊天室'),
+            child: const Text('进入AI数字人'),
             onPressed: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) {
-                    return Xmvx.csChatRoomPage;
+                    return Xmvx.vxAIVXPage;
                   },
                 ),
               );

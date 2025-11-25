@@ -21,7 +21,7 @@ class Xmvx {
     csBackToNative = backToNative;
   }
 
-  static get csChatRoomPage {
+  static get vxAIVXPage {
     // return BlocProvider(create: (context) => CSChatRoomCubit(), child: CSChatRoomPage());
     return XmvxHomePage();
   }
