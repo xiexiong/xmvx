@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:xmvx/extension/vx_appbar_widget.dart';
 import 'package:xmvx/extension/vx_image_ext.dart';
 import 'package:xmvx/helper/vx_color.dart';
 import 'package:xmvx/pages/create/vx_create_copywriting_page.dart';
@@ -32,36 +33,15 @@ class _XmvxHomePageState extends State<XmvxHomePage> with TickerProviderStateMix
       builder: (context, child) {
         return Scaffold(
           backgroundColor: VxColor.cF4F5FA,
-          appBar: AppBar(
-            title: Text(
-              "AI数字人",
-              style: TextStyle(
-                color: VxColor.c1A1A1A,
-                fontSize: 36.sp,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-            flexibleSpace: Container(decoration: BoxDecoration(gradient: VxColor.cE8F5FF_cE3F0FD)),
+          appBar: VxAppbarWidget(
+            title: "数字人短视频",
+            boxDecoration: BoxDecoration(gradient: VxColor.cE8F5FF_cE3F0FD),
           ),
           body: SafeArea(
             child: CustomScrollView(
               slivers: [
                 // 顶部区域
                 SliverToBoxAdapter(child: _TopHeader()),
-                // 热门模版标题
-                SliverToBoxAdapter(
-                  child: Padding(
-                    padding: EdgeInsets.fromLTRB(32.w, 48.w, 32.w, 0.w),
-                    child: Text(
-                      "热门模版",
-                      style: TextStyle(
-                        color: VxColor.c1A1A1A,
-                        fontSize: 32.sp,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ),
                 // TabBar吸顶
                 SliverPersistentHeader(
                   pinned: true,

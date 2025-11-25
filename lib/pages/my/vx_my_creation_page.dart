@@ -220,7 +220,7 @@ class _VxMyCreationPageState extends State<VxMyCreationPage> {
 
   Widget _buildSheetItem(String title, VoidCallback onTap, {Color textColor = VxColor.c1A1A1A}) {
     if (!isClick && title == '开直播') {
-      return Divider(height: 0.w, color: VxColor.c000000.withValues(alpha: 0));
+      return Divider(height: 0.w, color: VxColor.cBlack.withValues(alpha: 0));
     }
     return GestureDetector(
       onTap: onTap,
