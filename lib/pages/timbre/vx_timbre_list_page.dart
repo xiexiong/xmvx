@@ -88,7 +88,7 @@ class _VxTimbreListPageState extends State<VxTimbreListPage> {
             child: Container(
               margin: EdgeInsets.only(top: 19.w, right: 32.w, left: 32.w, bottom: 139.w),
               decoration: BoxDecoration(
-                color: VxColor.cWhite,
+                color: VxColor.cFFFFFF,
                 borderRadius: BorderRadius.circular(24.w),
               ),
               child: ListView.builder(
@@ -195,7 +195,7 @@ class _VxTimbreListPageState extends State<VxTimbreListPage> {
                   child: Text(
                     "克隆音色",
                     style: TextStyle(
-                      color: VxColor.cWhite,
+                      color: VxColor.cFFFFFF,
                       fontSize: 34.sp,
                       fontWeight: FontWeight.w600,
                     ),
@@ -213,7 +213,7 @@ class _VxTimbreListPageState extends State<VxTimbreListPage> {
     VXAdaptiveBottomSheet.show(
       context: context,
       showDragHandle: false,
-      backgroundColor: VxColor.cWhite,
+      backgroundColor: VxColor.cFFFFFF,
       isShowButtom: false,
       left: _adaptiveBottomSheetLeftWidget(),
       center: Text(""),

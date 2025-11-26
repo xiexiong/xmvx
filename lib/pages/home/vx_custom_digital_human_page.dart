@@ -71,7 +71,7 @@ class _VXCustomDigitalHumanPageState extends State<VXCustomDigitalHumanPage> {
     return Container(
       height: 670.w,
       decoration: BoxDecoration(
-        color: VxColor.cWhite,
+        color: VxColor.cFFFFFF,
         borderRadius: BorderRadius.circular(24.w),
         border: Border.all(width: 1.w, color: VxColor.cEDEDED),
       ),
@@ -92,7 +92,7 @@ class _VXCustomDigitalHumanPageState extends State<VXCustomDigitalHumanPage> {
     return Container(
       height: 112.w,
       padding: EdgeInsets.only(left: 24.w, right: 22.w),
-      decoration: BoxDecoration(color: VxColor.cWhite, borderRadius: BorderRadius.circular(24.w)),
+      decoration: BoxDecoration(color: VxColor.cFFFFFF, borderRadius: BorderRadius.circular(24.w)),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -111,7 +111,7 @@ class _VXCustomDigitalHumanPageState extends State<VXCustomDigitalHumanPage> {
         onTap: () {
           Navigator.push(context, MaterialPageRoute(builder: (context) => VxVideoRecorderPage()));
         },
-        child: Center(child: _textView("开始制作", VxColor.cWhite, 32.sp, FontWeight.bold)),
+        child: Center(child: _textView("开始制作", VxColor.cFFFFFF, 32.sp, FontWeight.bold)),
       ),
     );
   }
@@ -125,7 +125,7 @@ class _VXCustomDigitalHumanPageState extends State<VXCustomDigitalHumanPage> {
     VXAdaptiveBottomSheet.show(
       context: context,
       showDragHandle: false,
-      backgroundColor: VxColor.cWhite,
+      backgroundColor: VxColor.cFFFFFF,
       isShowButtom: false,
       left: Text(""),
       center: _textView(txt, VxColor.c1A1A1A, 32.sp, FontWeight.bold),
@@ -219,12 +219,12 @@ class _VXCustomDigitalHumanPageState extends State<VXCustomDigitalHumanPage> {
           Icon(
             isShoot ? Icons.camera_alt_outlined : Icons.photo_outlined,
             weight: 40.w,
-            color: isShoot ? VxColor.cWhite : VxColor.c1A1A1A,
+            color: isShoot ? VxColor.cFFFFFF : VxColor.c1A1A1A,
           ),
           Gap(8.w),
           _textView(
             isShoot ? "直接拍摄" : "上传视频",
-            isShoot ? VxColor.cWhite : VxColor.c1A1A1A,
+            isShoot ? VxColor.cFFFFFF : VxColor.c1A1A1A,
             34.sp,
             FontWeight.bold,
           ),

@@ -90,7 +90,7 @@ class _MediaHomePageState extends State<VXMediaHomePage> {
                           controller: _inputFieldController,
                           maxLines: null,
                           style: TextStyle(
-                            color: VxColor.cWhite,
+                            color: VxColor.cFFFFFF,
                             fontSize: 30.sp,
                             fontWeight: FontWeight.w400,
                           ),
@@ -192,7 +192,7 @@ class _MediaHomePageState extends State<VXMediaHomePage> {
         children: [
           VxImageExt(assetPath: iImg, width: 64.w, height: 64.w),
           Gap(12.w),
-          Text(iTxt, style: TextStyle(color: VxColor.cWhite, fontSize: 24.w)),
+          Text(iTxt, style: TextStyle(color: VxColor.cFFFFFF, fontSize: 24.w)),
         ],
       ),
     );
@@ -203,7 +203,7 @@ class _MediaHomePageState extends State<VXMediaHomePage> {
       width: iWidth,
       height: 52.w,
       decoration: BoxDecoration(
-        color: VxColor.cWhite.withValues(alpha: 0.08),
+        color: VxColor.cFFFFFF.withValues(alpha: 0.08),
         borderRadius: BorderRadius.circular(8.w),
       ),
       child: Row(
@@ -211,7 +211,7 @@ class _MediaHomePageState extends State<VXMediaHomePage> {
           Gap(14.w),
           VxImageExt(assetPath: iImg, width: 30.w, height: 30.w),
           Gap(7.w),
-          Text(iTxt, style: TextStyle(color: VxColor.cWhite, fontSize: 24.sp)),
+          Text(iTxt, style: TextStyle(color: VxColor.cFFFFFF, fontSize: 24.sp)),
         ],
       ),
     );
@@ -236,7 +236,7 @@ class _MediaHomePageState extends State<VXMediaHomePage> {
                     assetPath: 'assets/vx_back_icon.png',
                     width: 48.w,
                     height: 48.w,
-                    color: VxColor.cWhite,
+                    color: VxColor.cFFFFFF,
                   ),
                 ],
               ),
@@ -249,7 +249,7 @@ class _MediaHomePageState extends State<VXMediaHomePage> {
               width: 336.w,
               height: 64.w,
               decoration: BoxDecoration(
-                color: VxColor.cWhite.withValues(alpha: 0.08),
+                color: VxColor.cFFFFFF.withValues(alpha: 0.08),
                 borderRadius: BorderRadius.circular(32.w),
               ),
               child: Row(
@@ -271,7 +271,7 @@ class _MediaHomePageState extends State<VXMediaHomePage> {
                         child: Text(
                           "视频数字人",
                           style: TextStyle(
-                            color: _tabIndex ? VxColor.cWhite : VxColor.c969DA7,
+                            color: _tabIndex ? VxColor.cFFFFFF : VxColor.c969DA7,
                             fontSize: 24.sp,
                             fontWeight: FontWeight.w600,
                           ),
@@ -296,7 +296,7 @@ class _MediaHomePageState extends State<VXMediaHomePage> {
                         child: Text(
                           "图片数字人",
                           style: TextStyle(
-                            color: _tabIndex ? VxColor.c969DA7 : VxColor.cWhite,
+                            color: _tabIndex ? VxColor.c969DA7 : VxColor.cFFFFFF,
                             fontSize: 24.sp,
                             fontWeight: FontWeight.w600,
                           ),
@@ -321,7 +321,7 @@ class _MediaHomePageState extends State<VXMediaHomePage> {
                 "合成",
                 style: TextStyle(
                   fontSize: 32.sp,
-                  color: VxColor.cWhite,
+                  color: VxColor.cFFFFFF,
                   fontWeight: FontWeight.w400,
                 ),
               ),
@@ -350,7 +350,7 @@ class _MediaHomePageState extends State<VXMediaHomePage> {
           isNoeTitle
               ? GestureDetector(onTap: () {}, child: _showRightWidget())
               : IconButton(
-                icon: Icon(Icons.done_rounded, weight: 48.w, color: VxColor.cWhite),
+                icon: Icon(Icons.done_rounded, weight: 48.w, color: VxColor.cFFFFFF),
                 onPressed: () => Navigator.pop(context),
               ),
       child: contentBody,
@@ -368,7 +368,7 @@ class _MediaHomePageState extends State<VXMediaHomePage> {
       txt,
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
-      style: TextStyle(color: VxColor.cWhite, fontSize: 32.sp, fontWeight: FontWeight.bold),
+      style: TextStyle(color: VxColor.cFFFFFF, fontSize: 32.sp, fontWeight: FontWeight.bold),
     );
   }
 
@@ -376,7 +376,7 @@ class _MediaHomePageState extends State<VXMediaHomePage> {
     return Container(
       alignment: Alignment.centerLeft,
       child: IconButton(
-        icon: Icon(Icons.close, weight: 48.w, color: VxColor.cWhite),
+        icon: Icon(Icons.close, weight: 48.w, color: VxColor.cFFFFFF),
         onPressed: () => Navigator.pop(context),
       ),
     );
@@ -388,7 +388,7 @@ class _MediaHomePageState extends State<VXMediaHomePage> {
       height: 64.w,
       margin: EdgeInsets.only(right: 32.w),
       decoration: BoxDecoration(
-        color: VxColor.cWhite.withValues(alpha: 0.08),
+        color: VxColor.cFFFFFF.withValues(alpha: 0.08),
         borderRadius: BorderRadius.circular(8.w),
       ),
       child: Center(

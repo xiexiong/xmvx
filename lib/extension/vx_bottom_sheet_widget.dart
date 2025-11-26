@@ -72,13 +72,13 @@ class VxBottomSheetWidget {
                                     style: TextStyle(
                                       fontSize: 32.sp,
                                       fontWeight: FontWeight.w500,
-                                      color: VxColor.cWhite,
+                                      color: VxColor.cFFFFFF,
                                     ),
                                   ),
                                 ),
                               ),
                               IconButton(
-                                icon: Icon(Icons.check, weight: 48.w, color: VxColor.cWhite),
+                                icon: Icon(Icons.check, weight: 48.w, color: VxColor.cFFFFFF),
                                 onPressed: () {
                                   Navigator.pop(context);
                                   onConfirm();

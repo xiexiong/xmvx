@@ -30,7 +30,7 @@ class VxAppbarWidget extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       title: Text(
         title,
-        style: TextStyle(color: VxColor.c1A1A1A, fontSize: 36.sp, fontWeight: FontWeight.w600),
+        style: TextStyle(color: VxColor.c1A1A1A, fontSize: 36.sp, fontWeight: FontWeight.bold),
       ),
       leading:
           showDefaultBackButton

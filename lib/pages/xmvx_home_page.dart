@@ -1,3 +1,4 @@
+import 'package:banner_carousel/banner_carousel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
@@ -7,8 +8,6 @@ import 'package:xmvx/helper/vx_color.dart';
 import 'package:xmvx/pages/create/vx_create_copywriting_page.dart';
 import 'package:xmvx/pages/home/vx_custom_digital_human_page.dart';
 import 'package:xmvx/pages/home/vx_module_style_detail_page.dart';
-import 'package:xmvx/pages/media/vx_media_home_page.dart';
-import 'package:xmvx/pages/my/vx_my_creation_page.dart';
 import 'package:xmvx/pages/timbre/vx_timbre_list_page.dart';
 
 /// 首页主页面
@@ -21,8 +20,58 @@ class XmvxHomePage extends StatefulWidget {
 
 class _XmvxHomePageState extends State<XmvxHomePage> with TickerProviderStateMixin {
   // Tab数据
-  final List<String> _templateTabs = ["精选模版", "职场工作", "养生中医", "工厂车间", "饮食安全"];
+  final List<String> _templateTabs = ["推荐模板"];
   int _selectedTemplateTab = 0;
+  final ScrollController _scrollController = ScrollController();
+  double _scrollOffset = 0.0;
+  bool _hasTriggered = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(_scrollListener);
+  }
+
+  void _scrollListener() {
+    setState(() {
+      _scrollOffset = _scrollController.offset;
+    });
+
+    // 获取屏幕高度
+    final screenHeight = MediaQuery.of(context).size.height;
+    const tripleScreenHeight = 1.0; // 三屏高度倍数
+
+    // 计算是否滑动超过三屏
+    if (_scrollOffset >= screenHeight * tripleScreenHeight && !_hasTriggered) {
+      setState(() {
+        _hasTriggered = true;
+      });
+    } else if (_scrollOffset <= screenHeight * tripleScreenHeight && _hasTriggered) {
+      setState(() {
+        _hasTriggered = false;
+      });
+    }
+  }
+
+  void _scrollToTop() {
+    _scrollController.animateTo(
+      0,
+      duration: const Duration(milliseconds: 500),
+      curve: Curves.easeInOut,
+    );
+    Future.delayed(const Duration(milliseconds: 500), () {
+      setState(() {
+        _hasTriggered = false;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _scrollController.removeListener(_scrollListener);
+    _scrollController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,39 +81,72 @@ class _XmvxHomePageState extends State<XmvxHomePage> with TickerProviderStateMix
       splitScreenMode: true,
       builder: (context, child) {
         return Scaffold(
-          backgroundColor: VxColor.cF4F5FA,
           appBar: VxAppbarWidget(
             title: "数字人短视频",
-            boxDecoration: BoxDecoration(gradient: VxColor.cE8F5FF_cE3F0FD),
+            boxDecoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/home_bg_appbar.png', package: 'xmvx'),
+                fit: BoxFit.cover,
+              ),
+            ),
           ),
-          body: SafeArea(
-            child: CustomScrollView(
-              slivers: [
-                // 顶部区域
-                SliverToBoxAdapter(child: _TopHeader()),
-                // TabBar吸顶
-                SliverPersistentHeader(
-                  pinned: true,
-                  delegate: _TemplateTabBarDelegate(
-                    child: _TemplateTabBar(
-                      tabs: _templateTabs,
-                      selected: _selectedTemplateTab,
-                      onChanged: (idx) {
-                        setState(() {
-                          _selectedTemplateTab = idx;
-                        });
-                      },
+          body: Stack(
+            children: [
+              // 固定背景色区域
+              Positioned(
+                top: 0,
+                left: 0,
+                right: 0,
+                height: 288.w, // 固定高度
+                child: VxImageExt(
+                  assetPath: 'assets/home_bg_body.png',
+                  width: ScreenUtil().screenWidth,
+                  height: 288.w,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              SafeArea(
+                child: CustomScrollView(
+                  controller: _scrollController,
+                  slivers: [
+                    // 顶部区域
+                    SliverToBoxAdapter(child: _TopHeader()),
+                    // TabBar吸顶
+                    SliverPersistentHeader(
+                      pinned: false,
+                      delegate: _TemplateTabBarDelegate(
+                        child: _TemplateTabBar(
+                          tabs: _templateTabs,
+                          selected: _selectedTemplateTab,
+                          onChanged: (idx) {
+                            setState(() {
+                              _selectedTemplateTab = idx;
+                            });
+                          },
+                        ),
+                      ),
                     ),
-                  ),
+                    // 网格内容
+                    SliverToBoxAdapter(
+                      child: Padding(
+                        padding: EdgeInsets.fromLTRB(32.w, 0.w, 32.w, 24.w),
+                        child: _TemplateGrid(selectedTab: _selectedTemplateTab),
+                      ),
+                    ),
+                  ],
                 ),
-                // 网格内容
-                SliverToBoxAdapter(
-                  child: Padding(
-                    padding: EdgeInsets.fromLTRB(32.w, 0.w, 32.w, 24.w),
-                    child: _TemplateGrid(selectedTab: _selectedTemplateTab),
-                  ),
-                ),
-              ],
+              ),
+            ],
+          ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              _scrollToTop();
+            },
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            child: Visibility(
+              visible: _hasTriggered,
+              child: VxImageExt(assetPath: 'assets/to_top_icon.png', width: 96.w, height: 96.w),
             ),
           ),
         );
@@ -74,64 +156,55 @@ class _XmvxHomePageState extends State<XmvxHomePage> with TickerProviderStateMix
 }
 
 /// 顶部区域组件
+// ignore: must_be_immutable
 class _TopHeader extends StatelessWidget {
+  List<BannerModel> listBanners = [
+    BannerModel(
+      id: "1",
+      imagePath:
+          'https://imgs-qn.51miz.com/Element/00/80/89/67/a82d18da_E808967_77319b42.jpg?imageMogr2/quality/100|imageMogr2/format/webp',
+    ),
+    BannerModel(
+      id: "2",
+      imagePath:
+          'https://imgs-qn.51miz.com/Element/00/81/10/40/9d80fdbe_E811040_2352fce2.jpg?imageMogr2/quality/100|imageMogr2/format/webp',
+    ),
+    BannerModel(
+      id: "3",
+      imagePath:
+          'https://imgs-qn.51miz.com/Element/00/81/10/35/0df87cf0_E811035_24ee159c.jpg?imageMogr2/quality/100|imageMogr2/format/webp',
+    ),
+    BannerModel(
+      id: "4",
+      imagePath:
+          'https://imgs-qn.51miz.com/Element/00/95/65/55/82953bd4_E956555_21743213.jpg?imageMogr2/quality/100|imageMogr2/format/webp',
+    ),
+  ];
   @override
   Widget build(BuildContext context) {
     return Container(
       width: ScreenUtil().screenWidth,
-      decoration: BoxDecoration(gradient: VxColor.cE3F0FD_cF4F5FA),
       padding: EdgeInsets.only(bottom: 24.w),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 32.w),
-            child: GestureDetector(
-              onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => VXMediaHomePage()));
-              },
-              child: Card(
-                elevation: 4.w,
-                shadowColor: VxColor.c143C42.withValues(alpha: 0.4),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24.w)),
-                child: Container(
-                  height: 240.w,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: VxColor.cWhite, width: 1.w),
-                    gradient: VxColor.cE8F5FF_cWhite,
-                    borderRadius: BorderRadius.circular(24.w),
-                  ),
-                  child: Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        VxImageExt(assetPath: 'assets/play.png', width: 56.w, height: 56.w),
-                        Gap(12.w),
-                        Text(
-                          "智能成片",
-                          style: TextStyle(
-                            fontSize: 32.sp,
-                            color: VxColor.c1A1A1A,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Gap(12.w),
-                        Text(
-                          "AI数字人快速生成视频",
-                          style: TextStyle(
-                            fontSize: 24.sp,
-                            color: VxColor.c969DA7,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
+          BannerCarousel(
+            banners: listBanners,
+            customizedIndicators: IndicatorModel.animation(
+              width: 8.w,
+              height: 8.w,
+              spaceBetween: 8.w,
+              widthAnimation: 16.w,
             ),
+            width: ScreenUtil().screenWidth,
+            height: 320.w,
+            activeColor: VxColor.cFFFFFF,
+            disableColor: VxColor.cFFFFFF.withValues(alpha: 0.4),
+            animation: true,
+            borderRadius: 16.w,
+            indicatorBottom: false,
           ),
-          Gap(40.w),
+          Gap(48.w),
           // 图标菜单区
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 32.w),
@@ -145,7 +218,7 @@ class _TopHeader extends StatelessWidget {
                       MaterialPageRoute(builder: (context) => VXCustomDigitalHumanPage()),
                     );
                   },
-                  child: _MenuIcon(title: "定制数字人", img: "play"),
+                  child: _MenuIcon(title: "图生视频", img: "play"),
                 ),
                 GestureDetector(
                   onTap: () {
@@ -154,7 +227,7 @@ class _TopHeader extends StatelessWidget {
                       MaterialPageRoute(builder: (context) => VxTimbreListPage()),
                     );
                   },
-                  child: _MenuIcon(title: "克隆音色", img: "play"),
+                  child: _MenuIcon(title: "视频生视频", img: "play"),
                 ),
                 GestureDetector(
                   onTap: () {
@@ -163,17 +236,17 @@ class _TopHeader extends StatelessWidget {
                       MaterialPageRoute(builder: (context) => VxCreateCopywritingPage()),
                     );
                   },
-                  child: _MenuIcon(title: "AI文案创作", img: "play"),
+                  child: _MenuIcon(title: "我的视频", img: "play"),
                 ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => VxMyCreationPage()),
-                    );
-                  },
-                  child: _MenuIcon(title: "我的创作", img: "play"),
-                ),
+                // GestureDetector(
+                //   onTap: () {
+                //     Navigator.push(
+                //       context,
+                //       MaterialPageRoute(builder: (context) => VxMyCreationPage()),
+                //     );
+                //   },
+                //   child: _MenuIcon(title: "我的创作", img: "play"),
+                // ),
               ],
             ),
           ),
@@ -191,15 +264,33 @@ class _MenuIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        VxImageExt(assetPath: "assets/$img.png", width: 64.w, height: 64.w),
-        Gap(8.w),
-        Text(
-          title,
-          style: TextStyle(fontSize: 24.sp, color: VxColor.c1A1A1A, fontWeight: FontWeight.w400),
+    return Card(
+      elevation: 4.0,
+      shadowColor: VxColor.c000000.withValues(alpha: 0.04),
+      child: Container(
+        width: (ScreenUtil().screenWidth - 57) / 3,
+        height: 136.w,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16.w),
+          gradient: VxColor.cE8F5FF_cffffff,
+          border: Border.all(color: VxColor.cFFFFFF, width: 1.w),
         ),
-      ],
+        child: Column(
+          children: [
+            Gap(16.w),
+            VxImageExt(assetPath: "assets/$img.png", width: 64.w, height: 64.w),
+            Gap(4.w),
+            Text(
+              title,
+              style: TextStyle(
+                fontSize: 24.sp,
+                color: VxColor.c1A1A1A,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
@@ -215,7 +306,7 @@ class _TemplateTabBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: VxColor.cF4F5FA,
+      color: Colors.transparent,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         padding: EdgeInsets.only(left: 0, right: 0, top: 24.w),
@@ -238,19 +329,20 @@ class _TemplateTabBar extends StatelessWidget {
                       tabs[idx],
                       style: TextStyle(
                         color: isSelected ? VxColor.c1A1A1A : VxColor.c51565F,
-                        fontSize: 30.sp,
+                        fontSize: 32.sp,
                         fontWeight: isSelected ? FontWeight.w500 : FontWeight.w400,
                       ),
                     ),
-                    Gap(2.w),
-                    Container(
-                      width: 48.w,
-                      height: 8.w,
-                      decoration: BoxDecoration(
-                        color: isSelected ? VxColor.c4F7EFF : VxColor.cF4F5FA,
-                        borderRadius: BorderRadius.all(Radius.circular(4.w)),
-                      ),
-                    ),
+                    // Gap(2.w),
+                    // Container(
+                    //   width: 48.w,
+                    //   height: 8.w,
+                    //   decoration: BoxDecoration(
+                    //     // 设置底部选中指示器
+                    //     color: isSelected ? VxColor.c4F7EFF : VxColor.cF4F5FA,
+                    //     borderRadius: BorderRadius.all(Radius.circular(4.w)),
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
@@ -293,27 +385,6 @@ class _TemplateGrid extends StatelessWidget {
     // 不同tab展示不同数据
     final List<Map<String, String>> data;
     switch (selectedTab) {
-      case 1:
-        data = [
-          {"img": "play.png", "title": "办公场景 - 郑佳梦"},
-          {"img": "play.png", "title": "办公场景 - 孙振华"},
-        ];
-        break;
-      case 2:
-        data = [
-          {"img": "play.png", "title": "养生中医 - 许昭宇"},
-        ];
-        break;
-      case 3:
-        data = [
-          {"img": "play.png", "title": "工厂车间 - 李工"},
-        ];
-        break;
-      case 4:
-        data = [
-          {"img": "play.png", "title": "饮食安全 - 王老师"},
-        ];
-        break;
       default:
         data = [
           {"img": "play.png", "title": "办公场景 - 郑佳梦"},
@@ -328,6 +399,38 @@ class _TemplateGrid extends StatelessWidget {
           {"img": "play.png", "title": "办公场景 - 孙振华"},
           {"img": "play.png", "title": "瑜伽 - 樊晴川"},
           {"img": "play.png", "title": "工厂车间 - 许昭宇"},
+          {"img": "play.png", "title": "办公场景 - 郑佳梦"},
+          {"img": "play.png", "title": "办公场景 - 孙振华"},
+          {"img": "play.png", "title": "瑜伽 - 樊晴川"},
+          {"img": "play.png", "title": "工厂车间 - 许昭宇"},
+          {"img": "play.png", "title": "办公场景 - 郑佳梦"},
+          {"img": "play.png", "title": "办公场景 - 孙振华"},
+          {"img": "play.png", "title": "瑜伽 - 樊晴川"},
+          {"img": "play.png", "title": "工厂车间 - 许昭宇"},
+          {"img": "play.png", "title": "办公场景 - 郑佳梦"},
+          {"img": "play.png", "title": "办公场景 - 孙振华"},
+          {"img": "play.png", "title": "办公场景 - 郑佳梦"},
+          {"img": "play.png", "title": "办公场景 - 孙振华"},
+          {"img": "play.png", "title": "瑜伽 - 樊晴川"},
+          {"img": "play.png", "title": "工厂车间 - 许昭宇"},
+          {"img": "play.png", "title": "办公场景 - 郑佳梦"},
+          {"img": "play.png", "title": "办公场景 - 孙振华"},
+          {"img": "play.png", "title": "瑜伽 - 樊晴川"},
+          {"img": "play.png", "title": "工厂车间 - 许昭宇"},
+          {"img": "play.png", "title": "办公场景 - 郑佳梦"},
+          {"img": "play.png", "title": "办公场景 - 孙振华"},
+          {"img": "play.png", "title": "瑜伽 - 樊晴川"},
+          {"img": "play.png", "title": "工厂车间 - 许昭宇"},
+          {"img": "play.png", "title": "办公场景 - 郑佳梦"},
+          {"img": "play.png", "title": "办公场景 - 孙振华"},
+          {"img": "play.png", "title": "瑜伽 - 樊晴川"},
+          {"img": "play.png", "title": "工厂车间 - 许昭宇"},
+          {"img": "play.png", "title": "办公场景 - 郑佳梦"},
+          {"img": "play.png", "title": "办公场景 - 孙振华"},
+          {"img": "play.png", "title": "瑜伽 - 樊晴川"},
+          {"img": "play.png", "title": "工厂车间 - 许昭宇"},
+          {"img": "play.png", "title": "办公场景 - 郑佳梦"},
+          {"img": "play.png", "title": "办公场景 - 孙振华"},
         ];
     }
 
@@ -337,10 +440,10 @@ class _TemplateGrid extends StatelessWidget {
       physics: const NeverScrollableScrollPhysics(),
       itemCount: data.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        crossAxisSpacing: 19.w,
+        crossAxisCount: 3,
+        crossAxisSpacing: 16.w,
         mainAxisSpacing: 24.w,
-        childAspectRatio: 334.w / 520.w, // 调整比例，避免溢出
+        childAspectRatio: 222.w / 360.w, // 调整比例，避免溢出
       ),
       itemBuilder: (context, idx) {
         final item = data[idx];

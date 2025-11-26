@@ -143,7 +143,7 @@ class VXAdaptiveBottomSheet extends StatelessWidget {
         child: Center(
           child: Text(
             txt,
-            style: TextStyle(color: VxColor.cWhite, fontSize: 34.sp, fontWeight: FontWeight.bold),
+            style: TextStyle(color: VxColor.cFFFFFF, fontSize: 34.sp, fontWeight: FontWeight.bold),
           ),
         ),
       ),

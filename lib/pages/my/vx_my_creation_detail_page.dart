@@ -74,14 +74,14 @@ class _VxMyCreationDetailPageState extends State<VxMyCreationDetailPage> {
                     child: Icon(
                       Icons.arrow_back_ios_new_rounded,
                       weight: 64.w,
-                      color: VxColor.cWhite,
+                      color: VxColor.cFFFFFF,
                     ),
                   ),
                   GestureDetector(
                     onTap: () {
                       _showCustomBottomSheet(context);
                     },
-                    child: Icon(Icons.more_vert, weight: 64.w, color: VxColor.cWhite),
+                    child: Icon(Icons.more_vert, weight: 64.w, color: VxColor.cFFFFFF),
                   ),
                 ],
               ),
@@ -100,7 +100,7 @@ class _VxMyCreationDetailPageState extends State<VxMyCreationDetailPage> {
           // 下载按钮
           Expanded(
             child: _vxmcdButton(
-              color: VxColor.cWhite.withValues(alpha: 0.08),
+              color: VxColor.cFFFFFF.withValues(alpha: 0.08),
               text: "下载",
               onTap: _onDownloadTap,
             ),
@@ -127,7 +127,7 @@ class _VxMyCreationDetailPageState extends State<VxMyCreationDetailPage> {
         child: Center(
           child: Text(
             text,
-            style: TextStyle(color: VxColor.cWhite, fontSize: 34.sp, fontWeight: FontWeight.w500),
+            style: TextStyle(color: VxColor.cFFFFFF, fontSize: 34.sp, fontWeight: FontWeight.w500),
           ),
         ),
       ),

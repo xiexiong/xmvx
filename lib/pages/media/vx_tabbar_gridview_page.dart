@@ -44,7 +44,7 @@ class _VXTabBarGridViewPageState extends State<VXTabBarGridViewPage>
             isScrollable: true,
             tabAlignment: TabAlignment.center,
             dividerColor: Colors.transparent,
-            labelColor: VxColor.cWhite,
+            labelColor: VxColor.cFFFFFF,
             unselectedLabelColor: VxColor.c969DA7,
             indicatorColor: Colors.transparent,
             tabs: _categories.map((category) => Tab(text: category, height: 72.w)).toList(),
@@ -81,7 +81,7 @@ class _VXTabBarGridViewPageState extends State<VXTabBarGridViewPage>
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
-                                  color: VxColor.cWhite,
+                                  color: VxColor.cFFFFFF,
                                   fontSize: 24.sp,
                                   fontWeight: FontWeight.w400,
                                 ),

@@ -72,7 +72,7 @@ class _VXLeftRightLinkageWidgetState extends State<VXLeftRightLinkageWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: VxColor.cWhite,
+      backgroundColor: VxColor.cFFFFFF,
       body: Row(
         children: [
           // 左侧导航

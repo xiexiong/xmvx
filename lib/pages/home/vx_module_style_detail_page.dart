@@ -32,7 +32,7 @@ class _ModuleStyleDetailPageState extends State<VXModuleStyleDetailPage> {
                 assetPath: "assets/vx_back_icon.png",
                 width: 48.w,
                 height: 48.w,
-                color: VxColor.cWhite,
+                color: VxColor.cFFFFFF,
               ),
             ),
           ),
@@ -49,7 +49,7 @@ class _ModuleStyleDetailPageState extends State<VXModuleStyleDetailPage> {
         child: Center(
           child: Text(
             "做同款",
-            style: TextStyle(color: VxColor.cWhite, fontSize: 34.sp, fontWeight: FontWeight.w600),
+            style: TextStyle(color: VxColor.cFFFFFF, fontSize: 34.sp, fontWeight: FontWeight.w600),
           ),
         ),
       ),

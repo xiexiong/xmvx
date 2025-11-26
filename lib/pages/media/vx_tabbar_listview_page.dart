@@ -46,7 +46,7 @@ class _VXTabBarGridViewPageState extends State<VXTabBarListViewPage>
             isScrollable: true,
             tabAlignment: TabAlignment.center,
             dividerColor: Colors.transparent,
-            labelColor: VxColor.cWhite,
+            labelColor: VxColor.cFFFFFF,
             unselectedLabelColor: VxColor.c969DA7,
             indicatorColor: Colors.transparent,
             tabs: _categories.map((category) => Tab(text: category, height: 72.w)).toList(),
@@ -90,7 +90,7 @@ class _VXTabBarGridViewPageState extends State<VXTabBarListViewPage>
                                                   Text(
                                                     '$category Item $index - 郑佳梦',
                                                     style: TextStyle(
-                                                      color: VxColor.cWhite,
+                                                      color: VxColor.cFFFFFF,
                                                       fontSize: 32.sp,
                                                       fontWeight: FontWeight.w400,
                                                     ),
@@ -126,7 +126,7 @@ class _VXTabBarGridViewPageState extends State<VXTabBarListViewPage>
                                               Text(
                                                 '$category Item $index - 郑佳梦',
                                                 style: TextStyle(
-                                                  color: VxColor.cWhite,
+                                                  color: VxColor.cFFFFFF,
                                                   fontSize: 32.sp,
                                                   fontWeight: FontWeight.w400,
                                                 ),
@@ -143,7 +143,7 @@ class _VXTabBarGridViewPageState extends State<VXTabBarListViewPage>
                                                         (item) => Container(
                                                           height: 38.w,
                                                           decoration: BoxDecoration(
-                                                            color: VxColor.cWhite.withValues(
+                                                            color: VxColor.cFFFFFF.withValues(
                                                               alpha: 0.08,
                                                             ),
                                                             borderRadius: BorderRadius.circular(

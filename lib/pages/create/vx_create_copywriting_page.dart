@@ -103,7 +103,7 @@ class _VxCreateCopywritingPageState extends State<VxCreateCopywritingPage> {
                   height: 226.w,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(24.w),
-                    color: VxColor.cWhite,
+                    color: VxColor.cFFFFFF,
                   ),
                   child: Column(
                     children: [
@@ -148,7 +148,7 @@ class _VxCreateCopywritingPageState extends State<VxCreateCopywritingPage> {
             child: Container(
               width: ScreenUtil().screenWidth,
               height: 170.w,
-              color: VxColor.cWhite,
+              color: VxColor.cFFFFFF,
               child: GestureDetector(onTap: () {}, child: _bottomButtonWidget("生成文案")),
             ),
           ),
@@ -170,7 +170,7 @@ class _VxCreateCopywritingPageState extends State<VxCreateCopywritingPage> {
     return Container(
       width: ScreenUtil().screenWidth,
       height: 96.w,
-      decoration: BoxDecoration(color: VxColor.cWhite, borderRadius: BorderRadius.circular(24.w)),
+      decoration: BoxDecoration(color: VxColor.cFFFFFF, borderRadius: BorderRadius.circular(24.w)),
       padding: EdgeInsets.symmetric(horizontal: 24.w),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -192,7 +192,7 @@ class _VxCreateCopywritingPageState extends State<VxCreateCopywritingPage> {
     return Container(
       width: ScreenUtil().screenWidth,
       height: 360.w,
-      decoration: BoxDecoration(color: VxColor.cWhite, borderRadius: BorderRadius.circular(16.w)),
+      decoration: BoxDecoration(color: VxColor.cFFFFFF, borderRadius: BorderRadius.circular(16.w)),
       child: Stack(
         children: [
           Padding(
@@ -273,7 +273,7 @@ class _VxCreateCopywritingPageState extends State<VxCreateCopywritingPage> {
     VXAdaptiveBottomSheet.show(
       context: context,
       showDragHandle: false,
-      backgroundColor: VxColor.cWhite,
+      backgroundColor: VxColor.cFFFFFF,
       bottomTxt: "确认",
       left: Text(""),
       center: _textView(txt, VxColor.c1A1A1A, FontWeight.bold),
@@ -293,7 +293,7 @@ class _VxCreateCopywritingPageState extends State<VxCreateCopywritingPage> {
       child: Center(
         child: Text(
           txt,
-          style: TextStyle(color: VxColor.cWhite, fontSize: 34.sp, fontWeight: FontWeight.bold),
+          style: TextStyle(color: VxColor.cFFFFFF, fontSize: 34.sp, fontWeight: FontWeight.bold),
         ),
       ),
     );

@@ -26,6 +26,7 @@ dependencies:
   audio_session: 0.2.2
   image_picker: 1.2.0
   video_player: 2.10.0
+  banner_carousel: 1.2.1
   
 
 dev_dependencies:
@@ -68,6 +69,10 @@ flutter:
     - assets/playicon.png
     - assets/playing.png
     - assets/upload.png
+    - assets/home_bg_appbar.png
+    - assets/home_bg_body.png
+    - assets/to_top_icon.png
+
   #   - images/a_dot_ham.jpeg
   #
   # For details regarding assets in packages, see
