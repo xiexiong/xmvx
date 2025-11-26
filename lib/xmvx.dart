@@ -3,6 +3,7 @@ import 'package:xmvx/helper/vx_appinfo.dart';
 import 'package:xmvx/helper/vx_global.dart';
 import 'package:xmvx/helper/vx_user_manager.dart';
 import 'package:xmvx/pages/xmvx_home_page.dart';
+export 'package:xmvx/pages/router.dart';
 
 class Xmvx {
   static Future<void> init({

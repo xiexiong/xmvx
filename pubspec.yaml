@@ -1,7 +1,8 @@
 name: xmvx
 description: "A new Flutter plugin project."
 version: 0.0.1
-homepage:
+publish_to: none
+# homepage:
 
 environment:
   sdk: ^3.7.2
@@ -21,12 +22,14 @@ dependencies:
   connectivity_plus: 6.1.4
   event_bus: 2.0.1
   path_provider: 2.1.5
-  permission_handler: 12.0.1
+  permission_handler: 12.0.0+1
   flutter_sound: 9.28.0
   audio_session: 0.2.2
   image_picker: 1.2.0
   video_player: 2.10.0
   banner_carousel: 1.2.1
+  xmcp_base:
+    path: ../xmcp_base
   
 
 dev_dependencies:
